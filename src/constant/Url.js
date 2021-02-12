@@ -1,0 +1,1 @@
+export const Server_Url = "https://auctionnode.herokuapp.com/"
