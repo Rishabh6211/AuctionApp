@@ -23,12 +23,17 @@ import {
   Colors,
   phoneReg,
   emptyMobile,
-  invalidPhone
+  invalidPhone,
 } from '../../constant';
 const {height} = Dimensions.get('window');
-import {DesignedTextInput, DesignedButton, Header,Loader} from '../../components/';
+import {
+  DesignedTextInput,
+  DesignedButton,
+  Header,
+  Loader,
+} from '../../components/';
 import {Actions} from 'react-native-router-flux';
-import * as AppActions from '../../actions'
+import * as AppActions from '../../actions';
 
 class Login extends Component {
   constructor(props) {
@@ -38,24 +43,21 @@ class Login extends Component {
       password: '',
       passwordError: false,
       phoneError: false,
-      invalidPhone:false,
-      loading:false
+      invalidPhone: false,
+      loading: false,
     };
   }
 
-  componentDidMount(){
-  
-  }
+  componentDidMount() {}
 
   submit = () => {
-  
     let {phone, password} = this.state;
 
     if (phone) {
       if (phoneReg.test(phone)) {
-        this.setState({ invalidPhone: false })
+        this.setState({invalidPhone: false});
         if (password) {
-          let auth = {}
+          let auth = {};
           let body = {
             password: this.state.password,
             phone: this.state.phone,
@@ -63,31 +65,28 @@ class Login extends Component {
             //   type: Platform.OS,
             // },
           };
-          this.setState({loading:true})
-          this.props.login(auth,body,(data)=>{
-          
-            console.log('data---',data)
-            if(data && data !== null){
-              console.log('dtata----inside',)
-              this.props.getALLProduct((response)=>{
-                this.setState({loading:false})
-                if(response && response !== null){
-                  Actions.push('drawer');
-                }
-                
-              })
-              
-            }
-            else{
-              this.setState({loading:false})
-            }
-          }).catch((err)=>this.setState({loading:false}))
-          
+          this.setState({loading: true});
+          this.props
+            .login(auth, body, (data) => {
+              console.log('data---', data);
+              if (data && data !== null) {
+                console.log('dtata----inside');
+                this.props.getALLProduct((response) => {
+                  this.setState({loading: false});
+                  if (response && response !== null) {
+                    Actions.push('drawer');
+                  }
+                });
+              } else {
+                this.setState({loading: false});
+              }
+            })
+            .catch((err) => this.setState({loading: false}));
         } else {
           this.setState({passwordError: true});
         }
       } else {
-        this.setState({phoneError: true,invalidPhone: true});
+        this.setState({phoneError: true, invalidPhone: true});
       }
     } else {
       this.setState({phoneError: true});
@@ -96,7 +95,7 @@ class Login extends Component {
 
   errorView = (type) => {
     return (
-      <View style={{paddingTop: 1,marginHorizontal:20}}>
+      <View style={{paddingTop: 1, marginHorizontal: 20}}>
         <Text style={styles.errorTexts}>
           {type === 'phone' && this.state.invalidPhone
             ? invalidPhone
@@ -108,27 +107,37 @@ class Login extends Component {
     );
   };
 
-
-
   render() {
     return (
       <View style={{flex: 1, backgroundColor: Colors.White}}>
-       
-<View style={{height:height*0.15,justifyContent:'flex-end',marginHorizontal:moderateScale(20)}}>
-  <Text style={{fontSize:32}} >SignIn</Text>
-  </View>
-  <View style={{height:height*0.01,marginHorizontal:moderateScale(20),flexDirection:'row'}}>
-      <View style={{flex:0.25,borderBottomWidth:2,borderBottomColor:Colors.boderGray}}>
+        <View
+          style={{
+            height: height * 0.15,
+            justifyContent: 'flex-end',
+            marginHorizontal: moderateScale(20),
+          }}>
+          <Text style={{fontSize: 32}}>SignIn</Text>
         </View>
-    </View>
-    <View style={{height:height*0.07}}/>
+        <View
+          style={{
+            height: height * 0.01,
+            marginHorizontal: moderateScale(20),
+            flexDirection: 'row',
+          }}>
+          <View
+            style={{
+              flex: 0.25,
+              borderBottomWidth: 2,
+              borderBottomColor: Colors.boderGray,
+            }}></View>
+        </View>
+        <View style={{height: height * 0.07}} />
 
         <KeyboardAwareScrollView
           contentContainerStyle={{height: height * 0.9}}
           showsVerticalScrollIndicator={false}
           keyboardShouldPersistTaps="handled"
           enableAutomaticScroll={true}>
-       
           <View
             style={{
               flex: 0.13,
@@ -139,11 +148,12 @@ class Login extends Component {
               label="Phone Number*"
               keyboardType={'numeric'}
               value={this.state.phone}
-              onChangeText={(phone) => this.setState({phone,phoneError:false})}
+              onChangeText={(phone) =>
+                this.setState({phone, phoneError: false})
+              }
             />
-             
           </View>
-          {this.state.phoneError ? this.errorView("phone") : null}
+          {this.state.phoneError ? this.errorView('phone') : null}
           <View
             style={{
               flex: 0.13,
@@ -154,15 +164,17 @@ class Login extends Component {
               label="Password*"
               value={this.state.password}
               secureTextEntry={true}
-              onChangeText={(password) => this.setState({password,passwordError:false})}
+              onChangeText={(password) =>
+                this.setState({password, passwordError: false})
+              }
             />
           </View>
-          {this.state.passwordError ? this.errorView("password") : null}
+          {this.state.passwordError ? this.errorView('password') : null}
 
           <View style={{flex: 0.1}} />
           <View
             style={{flex: 0.1, justifyContent: 'center', alignItems: 'center'}}>
-            <DesignedButton buttonText="Log in" onPress={()=> this.submit()}/>
+            <DesignedButton buttonText="Log in" onPress={() => this.submit()} />
           </View>
           <View
             style={{
@@ -188,9 +200,8 @@ class Login extends Component {
               </Text>
             </TouchableOpacity>
           </View>
-          
         </KeyboardAwareScrollView>
-        <Loader loading={this.state.loading}/>
+        <Loader loading={this.state.loading} />
       </View>
     );
   }
@@ -198,13 +209,14 @@ class Login extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    ProductData: state.productReducer.productData?state.productReducer.productData:{}
-    };
+    ProductData: state.productReducer.productData
+      ? state.productReducer.productData
+      : {},
+  };
 };
 const mapDispatchToProps = (dispatch) => ({
- login :(auth,body,cb) => dispatch(AppActions.login(auth,body,cb)),
- getALLProduct:(cb) => dispatch(AppActions.getAllProduct(cb))
-
+  login: (auth, body, cb) => dispatch(AppActions.login(auth, body, cb)),
+  getALLProduct: (cb) => dispatch(AppActions.getAllProduct(cb)),
 });
 
 const styles = StyleSheet.create({
@@ -232,7 +244,7 @@ const styles = StyleSheet.create({
   errorTexts: {
     color: '#cc0000',
     fontSize: moderateScale(13),
-    textAlign:'left'
+    textAlign: 'left',
   },
 });
 
