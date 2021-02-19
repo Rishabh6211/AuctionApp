@@ -22,6 +22,8 @@ export default class DesignedTextInput extends Component {
       disabled,
       error,
       dense,
+      mode="flat",
+      onFocus=() =>{ },
       onBlur = () => { },
       onChangeText = () => { },
       onSubmitEditing = () => { },
@@ -34,7 +36,7 @@ export default class DesignedTextInput extends Component {
         underlineColorAndroid="transparent"
         autoCapitalize="none"
         label={label}
-        mode="flat"
+        mode={mode}
         theme={{ colors: { primary: Colors.StrongPink } }}
         multiline={multiline}
         numberOfLines={numberOfLines}
@@ -50,12 +52,13 @@ export default class DesignedTextInput extends Component {
         onSubmitEditing={onSubmitEditing}
         returnKeyType='done' 
         ref={ref}
-
+      onFocus={onFocus}
         underlineColor={underlineColor}
         disabled={disabled}
         placeholder={placeholder}
         error={error}
         dense={dense}
+       
       />
     );
   }

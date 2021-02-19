@@ -59,7 +59,7 @@ class SidebarComponent extends Component {
       <View style={styles.sidemenumaindiv}>
         <View style={styles.topContainer} >
          <View style={{flex:0.2}}/>
-         <TouchableOpacity style={{flex:0.8,flexDirection:'row'}} onPress={()=>Actions.profile()}>
+         <TouchableOpacity style={{flex:0.8,flexDirection:'row'}} onPress={()=>{Actions.profile();Actions.drawerClose();}}>
            <View style={{flex:0.3,justifyContent:'center',alignItems:'center'}}>
            <Avatar.Image size={80} source={{uri:'https://mpng.subpng.com/20180523/tha/kisspng-businessperson-computer-icons-avatar-clip-art-lattice-5b0508dc6a3a10.0013931115270566044351.jpg'}} />
              </View>

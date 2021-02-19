@@ -4,6 +4,7 @@ const INITIAL_STATE = {
     loading: false,
     productData: [],
     listingData:[],
+    productData:{}
     // categoryData:[]
 }
 
@@ -105,6 +106,30 @@ export default function productData(state = INITIAL_STATE, action) { // reducres
                         loading: false,
                         
                     }
+
+                    case types.PRODUCT_DATA_REQUEST:
+                        return {
+                            ...state,
+                            loading: true,
+                           
+                        }
+                        break;
+                    
+                    case types.PRODUCT_DATA_SUCCESS:
+                       
+                        return {
+                            ...state,
+                            productData: action.payload,
+                            loading: false,
+                           
+                        }
+                        break;
+                    case types.PRODUCT_DATA_FAIL:
+                        return {
+                            ...state,
+                            loading: false,
+                            
+                        }
         }
     return state;
 }

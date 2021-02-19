@@ -29,33 +29,46 @@ class Products extends Component {
     super(props);
     this.state = {
      auction:[],
-     fixedCost:[]
+     fixedCost:[],
+     loginUser:false
+
     }
   }
 
   componentDidMount(){
-    console.log('props---',this.props)
+
     
+  }
+
+
+  onSubmit = (item) => {
+    this.props.productDetail(item._id,(data)=>{
+      if(data && data !== null){
+        Actions.productDetail()
+      }
+    })
   }
 
    MyComponent = (item) => (
      <View style={{height:height*0.27,borderRadius:20}}>
        <View style={{height:height*0.22}}>
-   {/* <Image source={{ uri: `${Server_Url}/images/Products/${item.image[0]}` }} style={{height:150,width:180,alignSelf:'center',borderRadius:20}} /> */}
-   <Image source={{ uri: 'https://cdn.carbuzz.com/gallery-images/original/230000/200/230257.jpg' }} style={{height:150,width:180,alignSelf:'center',borderRadius:20}} />
+   <Image source={{ uri: `${Server_Url}/images/Products/${item.image[0]}` }} style={{height:150,width:180,alignSelf:'center',borderRadius:20}} />
+   {/* <Image source={{ uri: 'https://cdn.carbuzz.com/gallery-images/original/230000/200/230257.jpg' }} style={{height:150,width:180,alignSelf:'center',borderRadius:20}} /> */}
 
    </View>
    
    <View style={{height:height*0.05,justifyContent:'center',alignItems:'center'}}> 
      
    <Text style={{alignSelf:'center'}}>{truncateStr(item.title,20)}</Text>
+   {/* <Text style={{}}>{this.props.loginUser?'edit':''}</Text> */}
    {/* <Text style={{alignSelf:'center'}} >{truncateStr(item.description,25)}</Text> */}
 </View>
     </View>
   );
 
   render() {
-    console.log('props---',this.props)
+   
+    console.log('props---123',this.props,this.state)
     return (
       <View style={{flex:1}}>  
 <View style={{flex:0.11}}>
@@ -70,7 +83,7 @@ class Products extends Component {
           numColumns={2}
           data={this.props.listingData}
           renderItem={({item})=>
-          <TouchableOpacity style={{margin:10}} onPress={()=>Actions.productDetail({item:item})}> 
+          <TouchableOpacity style={{margin:10}} onPress={()=>this.onSubmit(item)}> 
             {this.MyComponent(item)}
           </TouchableOpacity>
         }
@@ -90,11 +103,12 @@ class Products extends Component {
 const mapStateToProps = state => {
   console.log('state----',state)
   return {
+    loginData : state.loginReducer.data?state.loginReducer.data:{},
     listingData : state.productReducer.listingData?state.productReducer.listingData:[],
   };
 };
 const mapDispatchToProps = dispatch => ({
-
+  productDetail:(id,cb) => dispatch(AppAction.productDetail(id,cb))
 });
 
 const styles = StyleSheet.create({

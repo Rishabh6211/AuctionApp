@@ -78,7 +78,7 @@ export const myListing = (id) => {
             console.log('datatata login login login logins', response)
             if (response.responseCode === 200) {
                 dispatch({type: types.MY_LISTING_SUCCESS, payload: response.data})
-
+                console.log('heree---')
                Actions.product()
                
             } else {
@@ -122,4 +122,90 @@ export const categoryByProduct = (auth,body) => {
         }
     }
 
+}
+
+export const productDetail = (id,cb) => {
+    return async dispatch => {
+        try {
+            dispatch({ type: types.PRODUCT_DATA_REQUEST })
+            const response = await Request({
+                url: `${Server_Url}productDetails/${id}`,
+                method: 'GET',
+              
+            })
+            console.log('products', response)
+            if (response.responseCode === 200) {
+                dispatch({type: types.PRODUCT_DATA_SUCCESS, payload: response.data})
+
+                    cb(response.data)
+               
+            } else {
+                dispatch({ type: types.PRODUCT_DATA_FAIL })
+                cb(null)
+            }
+        } catch (err) {
+            dispatch({ type: types.PRODUCT_DATA_FAIL })
+            console.log("err1", err)
+            cb(null)
+           
+        }
+}
+}
+
+export const productComment = (body,cb) => {
+    return async dispatch => {
+        try {
+            // dispatch({ type: types.PRODUCT_DATA_REQUEST })
+            const response = await Request({
+                url: `${Server_Url}comment`,
+                method: 'POST',
+                body
+              
+            })
+            console.log('products', response)
+            if (response.responseCode === 200) {
+                // dispatch({type: types.PRODUCT_DATA_SUCCESS, payload: response.data})
+
+                    cb(response.data)
+               
+            } else {
+                // dispatch({ type: types.PRODUCT_DATA_FAIL })
+                cb(null)
+            }
+        } catch (err) {
+            // dispatch({ type: types.PRODUCT_DATA_FAIL })
+            console.log("err1", err)
+            cb(null)
+           
+        }
+}
+}
+
+export const editProduct = (body,cb) => {
+    return async dispatch => {
+        try {
+            // dispatch({ type: types.PRODUCT_DATA_REQUEST })
+            const response = await Request({
+                url: `${Server_Url}editProduct`,
+                method: 'PUT',
+                body
+              
+            })
+            console.log('products', response)
+            if (response.responseCode === 200) {
+                // dispatch({type: types.PRODUCT_DATA_SUCCESS, payload: response.data})
+
+                    cb(true)
+               
+            } else {
+                // dispatch({ type: types.PRODUCT_DATA_FAIL })
+                cb(false)
+            }
+        } catch (err) {
+            // dispatch({ type: types.PRODUCT_DATA_FAIL })
+            console.log("err1", err)
+            cb(false)
+           
+        }
+}
 }

@@ -23,7 +23,7 @@ export const Colors = {
     insantGray: "#524a4a",
     boderGray: "#cac7c7",
     DimGrayText: '#787272',
-    transParentColor: "rgba(0,0,0,0.5)",
+    transParentColor: "rgba(0,0,0,0.3)",
     borderColor: "#d7d5d5",
     greenText: "#2a6e2c",
     orangeInviteFriends: "#fa551e",

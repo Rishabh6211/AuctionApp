@@ -212,3 +212,67 @@ export const resetPassword = (auth, body, cb) => {
     }
 
 }
+
+export const uploadImage = (auth, body, cb) => {
+    console.log('vody----',body,auth)
+    return async dispatch => {
+        try {
+            
+            const response = await Request({
+                url: `${Server_Url}image`,
+                method: 'PUT',
+                auth,
+                body,
+                
+            })
+            console.log('imageUpload', response)
+            if (response.responseCode === 200) {
+                
+                cb(true)
+               
+            } else {
+               
+                cb(false)
+            }
+        } catch (err) {
+            console.log("err1", err)
+            
+            cb(false)
+        }
+    }
+
+}
+
+export const updateUser = (auth, body, cb) => {
+    console.log('vody----',body,auth)
+    return async dispatch => {
+        try {
+            
+            const response = await Request({
+                url: `${Server_Url}updateuser`,
+                method: 'PUT',
+                auth,
+                body,
+                
+            })
+            console.log('imageUpload', response)
+            if (response.responseCode === 200) {
+                dispatch({type: types.LOGIN_SUCCESS, payload: response.data})
+                toast({
+                    text:response.message,
+                    type:'success'
+                })
+                cb(true)
+               
+            } else {
+               
+                cb(false)
+            }
+        } catch (err) {
+            console.log("err1", err)
+            
+            cb(false)
+        }
+    }
+
+}

@@ -38,7 +38,7 @@ class Signup extends Component {
     }
 
     submit = () => {
-        Actions.otp({phone: this.state.phone})
+        
         let {
             phone,
             name,

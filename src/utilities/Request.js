@@ -54,36 +54,29 @@ export const Request = async ({
 
     if (method === "GET") {
       const response = await fetch(url, { method, headers });
-     
-      // if(response&&response.status === 401){
-      //   dispatch(AppAction.sessioExpire())
-      // }
+    
       return response.json();
     }
     if (method === "POST" || method === "PUT" || method === "DELETE") {
-      if (contentType === "multipart") {
-        let formdata = await makeFormData(body);
-        console.log("multipart formdata", formdata);
+      // if (contentType === "multipart") {
+      //   let formdata = await makeFormData(body);
+      //   console.log("multipart formdata", formdata);
         
-        const response = await fetch(url, { method, headers, body: formdata });
+      //   const response = await fetch(url, { method, headers, body: formdata });
       
-        // if(response&&response.status === 401){
-        //   dispatch(AppAction.sessioExpire())
-        // }
-        return response.json();
-      } else {
+        
+      //   return response.json();
+      // } else {
     
         const response = await fetch(url, {
           method,
           headers,
           body: JSON.stringify(body)
         });
-        // if(response&&response.status === 401){
-        //   dispatch(AppAction.sessioExpire())
-        // }
+       
        
         return response.json();
-      }
+      // }
     }
   } catch (error) {
     console.log("errr",error)

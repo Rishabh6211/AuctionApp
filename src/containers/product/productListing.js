@@ -41,8 +41,8 @@ class ProductListing extends Component {
    MyComponent = (item) => (
      <View style={{height:height*0.27,borderRadius:20}}>
        <View style={{height:height*0.22}}>
-   {/* <Image source={{ uri: `${Server_Url}/images/Products/${item.image[0]}` }} style={{height:150,width:180,alignSelf:'center',borderRadius:20}} /> */}
-   <Image source={{ uri: 'https://cdn.carbuzz.com/gallery-images/original/230000/200/230257.jpg' }} style={{height:150,width:180,alignSelf:'center',borderRadius:20}} />
+   <Image source={{ uri: `${Server_Url}/images/Products/${item.image[0]}` }} style={{height:150,width:180,alignSelf:'center',borderRadius:20}} />
+   {/* <Image source={{ uri: 'https://cdn.carbuzz.com/gallery-images/original/230000/200/230257.jpg' }} style={{height:150,width:180,alignSelf:'center',borderRadius:20}} /> */}
 
    </View>
    
@@ -53,6 +53,14 @@ class ProductListing extends Component {
 </View>
     </View>
   );
+
+  onSubmit = (item) => {
+    this.props.productDetail(item._id,(data)=>{
+      if(data && data !== null){
+        Actions.productDetail()
+      }
+    })
+  }
 
   render() {
     console.log('props---',global.screen)
@@ -70,7 +78,7 @@ class ProductListing extends Component {
           numColumns={2}
           data={this.props.text=="Auction"?this.props.auctionProduct:this.props.fixedCostProd}
           renderItem={({item})=>
-          <TouchableOpacity style={{margin:10}} onPress={()=>Actions.productDetail({item:item})}> 
+          <TouchableOpacity style={{margin:10}} onPress={()=>this.onSubmit(item)}> 
             {this.MyComponent(item)}
           </TouchableOpacity>
         }
@@ -92,7 +100,8 @@ const mapStateToProps = state => {
   };
 };
 const mapDispatchToProps = dispatch => ({
- getALLProduct:(cb) => dispatch(AppAction.getAllProduct(cb))
+ getALLProduct:(cb) => dispatch(AppAction.getAllProduct(cb)),
+ productDetail:(id,cb) => dispatch(AppAction.productDetail(id,cb))
 });
 
 const styles = StyleSheet.create({
