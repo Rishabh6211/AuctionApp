@@ -423,6 +423,20 @@ class ProductDetail extends Component {
           ) : null}
 
           <View style={{height: height * 0.01}} />
+
+          <View style={{height: height * 0.15, marginHorizontal: 10,flexDirection:'row'}}>
+            <View style={{flex:0.2}}>
+              </View>
+            <View style={{flex:0.8}}>
+            <Card style={{backgroundColor: Colors.silverWhite}}>
+              <Card.Content>
+                <Title>{this.props.sellerData.name}</Title>
+                <Paragraph>{this.props.sellerData.address}</Paragraph>
+              </Card.Content>
+            </Card>
+            </View>
+          </View>
+
           <View style={{height: height * 0.15, marginHorizontal: 10}}>
             <Card style={{backgroundColor: Colors.silverWhite}}>
               <Card.Content>
@@ -678,8 +692,11 @@ class ProductDetail extends Component {
 const mapStateToProps = (state) => {
   console.log('state----', state);
   return {
-    productData: state.productReducer.productData
-      ? state.productReducer.productData
+    productData: state.productReducer.productData.data
+      ? state.productReducer.productData.data
+      : {},
+      sellerData: state.productReducer.productData.userInfo
+      ? state.productReducer.productData.userInfo
       : {},
     loginData: state.loginReducer.data ? state.loginReducer.data : {},
   };

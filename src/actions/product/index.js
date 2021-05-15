@@ -135,7 +135,7 @@ export const productDetail = (id,cb) => {
             })
             console.log('products', response)
             if (response.responseCode === 200) {
-                dispatch({type: types.PRODUCT_DATA_SUCCESS, payload: response.data})
+                dispatch({type: types.PRODUCT_DATA_SUCCESS, payload: response})
 
                     cb(response.data)
                
