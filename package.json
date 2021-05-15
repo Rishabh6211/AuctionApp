@@ -12,6 +12,7 @@
   "dependencies": {
     "@react-native-community/async-storage": "^1.12.1",
     "@react-native-community/netinfo": "^5.9.7",
+    "@react-native-picker/picker": "^1.15.0",
     "moment": "2.27.0",
     "native-base": "^2.15.2",
     "react": "16.13.1",

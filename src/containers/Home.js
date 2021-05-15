@@ -94,6 +94,7 @@ class Home extends Component {
     itemStyle={{
         justifyContent: 'flex-start'
     }}
+    zIndex={-1}
    
     selectedLabelStyle={{
       color: Colors.Black
@@ -267,7 +268,7 @@ class Home extends Component {
       />
          
           </View>:null} */}
-         { this.state.images.length>0?<View style={{height:height*0.1,flexDirection:'row',justifyContent:'center',alignItems:'center'}}>
+         {/* { this.state.images.length>0?<View style={{height:height*0.1,flexDirection:'row',justifyContent:'center',alignItems:'center'}}>
   
                     {this.state.images ? this.state.images.map(i => <View
                                                                           key={i.uri}>{this.renderImage(i)}</View>) : null}
@@ -280,7 +281,7 @@ class Home extends Component {
 
              onPress={()=>this.onAddProduct()}
              />
-          </View>
+          </View> */}
    </View>
  );
 

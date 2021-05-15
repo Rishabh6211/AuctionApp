@@ -1,12 +1,12 @@
 import { Dimensions } from 'react-native';
 import { ScaledSheet, moderateScale } from 'react-native-size-matters';
 const { height } = Dimensions.get('window');
-import { Colors } from '.';
+import { Colors } from './Color';
 import { RFValue } from "react-native-responsive-fontsize";
 import { Platform } from 'react-native';
 export const styles = ScaledSheet.create({
   container: {
-    backgroundColor: Colors.White,
+    backgroundColor: "#FFF",
     flex: 1,
   },
   flex1: {
